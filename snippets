@@ -1,0 +1,37 @@
+ //manifest password creation
+
+  String password = "OPM2"+((OpmClosings) man.getDataObject()).getDIFCrosswalk().getAgency();
+             return CustomZipUtil.create(manifestFiles, packagePath, password);
+
+ //dif password creation
+
+    String packagePath = suiteDir.getAbsolutePath() + "/" + difPackageType + DataGenerateManager.getCycleTimeStamp() +
+                        "_" + subject.getCaseNumber() + "_" + subject.getLastName().toUpperCase() + ".zip";
+                CustomZipUtil.create(files, packagePath, "123456789");
+
+ //manifest.java files
+
+    if (type.getName().equals("EFR")) {
+                        fr.setDifType(type.getName());
+                        fr.setCaseNumber(person.getCaseNumber());
+                        fr.setInputForm(eqip.getFormName() + " " + eqip.getFormVersion());
+                        fr.setSubjectName(person.getFirstName() + " " + person.getLastName());
+                        fr.setSubjectSSN(Integer.parseInt(person.getSsn()));
+                        mainGroup = Translator.getInstance().soiToGroup(roi.getCct().getCaseInfo().getSoi());
+                        fr.setMainGroup(mainGroup);
+                        fr.setFileName(prefix + DataGenerateManager.getCycleTimeStamp() + "_" + person.getCaseNumber() + "_" + person.getLastName().toUpperCase() + ".zip");
+                        fr.setFilePassword(123456789);
+                        crossWalk.getFr().add(fr);
+                    } else {
+                        caseInfo.setDifType(type.getName());
+                        caseInfo.setCaseNumber(person.getCaseNumber());
+                        caseInfo.setInputForm(eqip.getFormName() + " " + eqip.getFormVersion());
+                        caseInfo.setSubjectName(person.getFirstName() + " " + person.getLastName());
+                        caseInfo.setSubjectSSN(Integer.parseInt(person.getSsn()));
+                        mainGroup = Translator.getInstance().soiToGroup(roi.getCct().getCaseInfo().getSoi());
+                        System.out.println("main group value is set to" + mainGroup);
+                        caseInfo.setMainGroup(mainGroup);
+                        caseInfo.setFileName(prefix + DataGenerateManager.getCycleTimeStamp() + "_" + person.getCaseNumber() + "_" + person.getLastName().toUpperCase() + ".zip");
+                        caseInfo.setFilePassword(123456789);
+                        crossWalk.getCaseInfo().add(caseInfo);
+                    }
